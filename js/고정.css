@@ -1,0 +1,319 @@
+* {margin:0; padding: 0;}
+li {list-style:none;}
+a {text-decoration: none; display: block; color: black; font-family: 'Noto Sans KR', sans-serif;}
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    overflow-x: hidden
+}
+/* 시맨틱 태그 선택자 */
+header, section, footer {
+    width:100%;
+    float: left;
+}
+/* header, section, footer 안의 직속 자식 객체, 항상 브라우저의 가운데 정렬 */
+.box {
+    width: 1200px;
+    margin:0 auto;
+}
+/* 이미지 크기는 부모 크기에 맞춤 - 상대크기(%) */
+img {width: 100%;}
+/* 헤더 */
+header {
+    transition: all 0.5s;
+    position: fixed;
+    height: 90px;
+    top: 0;
+    left: 0;
+    background-color: transparent; /* 배경투명 */
+    z-index: 40;   /*배경이미지가 내비 가려서 이거 씀 section보다 위에 배치*/
+}
+/* 화면이 아래로 내려가면 header의 배경색 흰색으로 변함 (제이쿼리임) */
+header.active {
+    background-color: #fff;
+    box-shadow: 0 5px rgb(212, 212, 212); 
+    /*그림자*/
+}
+/* 로고 */
+header .box .logo {
+    width: 80px; /* 원래는 150px */
+    float: left;
+    margin: 20px 0; /* 원래 10px 0 */
+}
+/* 내비게이션 */
+header .box nav {
+    float: left; /*로고 옆에 배치*/
+    margin-left: 150px; /*로고와의 거리*/
+    margin-top: 24px; /*위쪽여백*/
+    /* 서브메뉴배경보다 위에 있어야함 */
+    position:relative;
+    z-index: 60;
+}
+/*주메뉴*/
+header .box nav > ul > li {
+    float: left;
+}
+header .box nav > ul > li > a {
+    font-size: 16px;
+    padding: 5px 30px;
+}
+header .box nav > ul > li:hover > a {
+    color: #477ed1;
+}
+/* 서브메뉴 */
+header .box nav .sub {
+    height: 0;
+    transition: all 0.5s;
+    overflow: hidden; /*영역에서 벗어난 컨텐츠 숨김*/
+}
+header .box nav .sub li a {
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+}
+/* 첫번째 서브메뉴의 위쪽 여백 늘리기 */
+header .box nav .sub li:first-child a {
+    padding-top: 70px;
+}
+header .box nav .sub li a:hover {
+    color: #477ed1;
+}
+/* 주메뉴에 마우스 오버했을때 서브메뉴 나옴 */
+header .box nav:hover .sub {
+    height: 270px; /*높이가 0에서 200px로 */
+}
+/* 서브메뉴 배경 */
+header .sub_bg {
+    width: 100%;
+    height: 290px;
+    background-color: #eee;
+    position: absolute; /*서브메뉴와 겹침*/
+    top: 80px;   /*위치설정*/
+    left: 0;
+    z-index: 50;
+    display: none; /*숨김*/
+}
+/* 로그인 회원가입 */
+header .box .top_menu {
+    float: right;
+    margin-top: 23px;
+}
+header .box .top_menu ul li {
+    float: left;
+    margin-left: 20px;
+}
+header .box .top_menu ul li a {
+    padding: 5px;
+    font-size: 13px;
+}
+/* 메인 비주얼 */
+.s1 {
+    width: 100%;
+    height: 970px;
+    background-image: url(../img/bg.png);
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+    background-position: center;
+    position: relative;
+}
+.s1 .photo {
+    width: 100%;
+    height: 970px;
+    position: relative; /* 자식객체 li들이 겹쳐질 때 .photo를 기준으로 위치설정 */
+}
+.s1 .photo ul li {
+    position: absolute; /*겹침*/
+    width: 100%;
+    height: 970px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* .photo와 li에 배경 이미지 넣기 */
+.s1 .photo ul li.main1{
+    background-image: url(../img/main1.png)
+}
+.s1 .photo ul li.main2{
+    background-image: url(../img/main2.png)
+}
+.s1 .photo ul li.main3{
+    background-image: url(../img/main3.png)
+}
+.s1 .photo {
+    width: 100%;
+    height: 970px;
+    position: relative; /* 자식객체 li들이 겹쳐질 때 .photo를 기준으로 위치설정 */
+}
+.s1 .photo ul li {
+    position: absolute; /*겹침*/
+    width: 100%;
+    height: 970px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* 메인비주얼의 첫번째 이미지가 보이도록 설정하기 */
+.s1 .photo ul li {
+    display: none; /*안보임*/
+}
+.s1 .photo ul li:first-child {
+    display: block; /*보임*/
+}
+/* 메인비주얼 왼쪽의 bar */
+.s1 .bar {
+    width: 120px; 
+    height: 970px;
+    background-color: rgb(185, 209, 228);
+    position:absolute;
+    top:0;
+    left:0;
+    /* color: #fff; */
+    opacity: 0.7; /*투명도*/
+    /* 글자 h3태그를 bar영역의 가운데로 정렬 */
+    display:flex;
+    flex-flow:row nowrap;
+    justify-content: center; /*좌우 가운데 정렬*/
+    align-items:center; /*상하 가운데 정렬*/
+}
+.s1 .bar h3 {
+    font-size: 20px;
+    opacity: 0.3; 
+    transform: rotate(90deg); /*90도 회전*/
+}
+/* 메인 비주얼의 설명과 버튼 */
+.s1 .des_box {
+    width: 1200px;
+    top:300px; /*원래는 250*/
+    /* position:absolute일때 좌우 가운데 정렬 공식 */
+    position:absolute;
+    left:50%;
+    transform: translateX(-50%);
+}
+.s1 .des_box .des {
+    height: 300px;
+}
+.s1 .des_box .des ul li {
+    position: absolute;  /*li겹침*/
+    display:none;
+}
+.s1 .des_box .des ul li:first-child {
+    display:block;
+}
+.s1 .des_box .des h2 {
+    font-weight:normal; /*굵지 않게*/
+    font-size: 20px;
+}
+.s1 .des_box .des h1 {
+    font-size: 50px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.s1 .des_box .des p {
+    color:#666;
+}
+.s1 .des_box .des a {
+    width: 120px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin: 30px 0;
+}
+.s1 .des_box .des a:hover {
+    background-color: #efefef;
+}
+.s1 .des_box .number {
+    margin-top: 20px;
+}
+.s1 .des_box .number div {
+    float: left;
+}
+.s1 .des_box .number .num ul li {
+    float: left;
+    padding: 10px 30px 10px 0; /* 위-오른쪽-아래-왼쪽 */
+    /* 동그랗게 하고 싶으면 border radius하기 */
+}
+.s1 .des_box .number .num ul li a {
+    font-weight: bold;
+}
+/* number가 활성화되면 나타나는 밑줄 */
+.s1 .des_box .number .num ul li a.active:after {
+    content:"";
+    display: block;
+    width: 100%;
+    height:3px;
+    margin-top: 5px;
+    background-color:#333;
+}
+
+.s1 .des_box .number .btn {
+    margin-top: 10px;
+    margin-left: 60px;
+}
+.s1 .des_box .number .btn hr {
+    float: left;
+    width: 80px;
+    height: 1px;
+    border: none;
+    background-color: #333;
+    margin-top: 13px;
+}
+.s1 .des_box .number .btn a {
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin-top: 3px;
+    margin-left: 20px;
+    background-image: url(../img/stop.png);
+    background-position: center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+.s1 .des_box .number .btn a.active {
+    background-image: url(../img/arrow.png);
+}
+/* scroll */
+/* scroll 버튼에서 동그라미 상하 운동 애니메이션 */
+/* keyframes라는 css명령어사용, ani는 애니메이션 이름 */
+@keyframes ani {
+    0% {
+        margin-top: 10px;
+        opacity: 1;  /*불투명*/
+    }
+    40% {
+        margin-top: 20px;
+        opacity: 1;
+    }
+    60% {
+        opacity: 0;  /*투명*/
+    }
+    100% {
+        opacity: 0;  /*투명*/
+    }
+}
+.s1 .scroll {
+    width: 80px;
+    position: absolute;   /*.phtoto와 겹침*/
+    left: 50%;    
+    transform: translateX(-50%); /*이거포함 위 3줄 가운데 정렬하란 공식*/
+    bottom:60px;   /*아래에서 60만큼 올라와서 배치*/
+    color: #444;
+    font-size: 13px;
+    text-align: center;
+}
+.s1 .scroll .scroll_btn {
+    width: 24px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid #666;
+    margin: 0 auto;   /*가운데 정렬*/
+    margin-top: 5px;
+}
+.s1 .scroll .scroll_btn .circle {
+    width: 10px;
+    height: 10px;
+    background-color: #666;
+    border-radius: 50%;
+    margin:0 auto;
+    margin-top: 20px;
+    animation: ani 2.3s infinite;  /*@keyframes에서 지정한 애니메이션을 실행하는 명령어, 2.3초동안 실행/ infinite는 반복하라는 것*/
+}
